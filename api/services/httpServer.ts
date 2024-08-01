@@ -1,6 +1,7 @@
 'use strict';
 
 import Hapi from '@hapi/hapi';
+import helloRoute from '../routes/hello-word.route';
 
 
 export default class HAPIServer {
@@ -15,13 +16,9 @@ export default class HAPIServer {
 
 
   async initialize() {
-
-    
-
-    // this.server.route(versionRoute);
-
-
-
+    // add all route in this place
+    this.server.route(helloRoute);
+  
   }
 
   async start() {
