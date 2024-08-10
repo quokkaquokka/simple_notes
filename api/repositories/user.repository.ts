@@ -8,8 +8,8 @@ export class MongoUsersRepository {
   }
 
  async createUser(mail: string, password: string) {
-
     const client = await mongodbService.mongoClient.connect();
+  
     const db = client.db();
 
      const userDocument = {
@@ -19,7 +19,6 @@ export class MongoUsersRepository {
 
     const result = await db.collection(this.collectionName).insertOne(userDocument);
   
-    console.log(`Document inserted with ID: ${result.insertedId}`);
     await client.close();
 
     return {
@@ -28,5 +27,37 @@ export class MongoUsersRepository {
       password
     };
    
+  }
+
+  async findUserByMail(mail: string) {
+    const client = await mongodbService.mongoClient.connect();
+    const db = client.db();
+    const query = { mail: mail };
+
+    const result = await db.collection(this.collectionName).findOne(query);
+  
+    await client.close();
+
+    return result;
+  }
+
+  async findAllUsers() {
+    const client = await mongodbService.mongoClient.connect();
+    const db = client.db();
+
+    const result = await db.collection(this.collectionName).find().toArray();
+    await client.close();
+
+    return result;
+  }
+
+
+  async clearAll() {
+    const client = await mongodbService.mongoClient.connect();
+    const db = client.db();
+
+    await db.collection(this.collectionName).deleteMany({});
+    await client.close();
+    return;
   }
 }
