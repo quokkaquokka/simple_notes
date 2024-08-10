@@ -1,0 +1,19 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "types": ["@types/jest"],
+    "outDir": "./dist"
+  },
+  "include": [
+    "./src/*/",
+    "./config/*/"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "jest-coverage",
+    "swagger"
+  ]
+}
