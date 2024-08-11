@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import mongodbService from '../services/databaseMongoDb';
 
 
@@ -36,6 +37,17 @@ export class MongoUsersRepository {
 
     const result = await db.collection(this.collectionName).findOne(query);
   
+    await client.close();
+
+    return result;
+  }
+
+  async findUserById(userId: string) {
+    const client = await mongodbService.mongoClient.connect();
+    const db = client.db();
+    const query = { _id: new ObjectId(userId) };
+
+    const result = await db.collection(this.collectionName).findOne(query);  
     await client.close();
 
     return result;

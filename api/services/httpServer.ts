@@ -3,6 +3,8 @@
 import Hapi from '@hapi/hapi';
 import helloRoute from '../routes/hello-word.route';
 import addUserRoute from '../routes/user/add-user.route';
+import addCategoryRoute from '../routes/category/postCategory.route';
+import getCategoriesRoute from '../routes/category/getCategoriesWithUserId.route';
 
 
 export default class HAPIServer {
@@ -20,6 +22,8 @@ export default class HAPIServer {
     // add all route in this place
     this.server.route(helloRoute);
     this.server.route(addUserRoute);
+    this.server.route(addCategoryRoute);
+    this.server.route(getCategoriesRoute);
   
   }
 

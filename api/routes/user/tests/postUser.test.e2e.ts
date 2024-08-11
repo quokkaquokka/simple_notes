@@ -32,14 +32,11 @@ describe('POST /user', () => {
             }
         });
 
-        console.log(response);
-
         expect(response.statusCode).toBe(200);
         const result = JSON.parse(response.payload);
-        console.log(result);
-        // expect(result).toHaveProperty('id');
-        // expect(result.name).toBe('John Doe');
-        // expect(result.email).toBe('john.doe@example.com');
+        expect(result.data).toHaveProperty('mail', 'john.doe@example.com');
+        expect(result.data).toHaveProperty('password', 'password');
+        expect(result.data).toHaveProperty('_id');
     });
 
     it('should return 400 if password or mail is missing', async () => {
